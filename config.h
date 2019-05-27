@@ -68,7 +68,7 @@ static const char *dmenucmd[] = { "rofi", "-modi", "drun", "-show", "drun", NULL
 static const char *termcmd[]  = { "st", NULL };
 static const char *iconscmd[]  = { "/home/kowal/.config/i3/scripts/dmenu-icons", NULL };
 static const char *updatecmd[]  = { "/home/kowal/.config/i3/scripts/run-updates", NULL };
-static const char *networkcmd[]  = { "nm-applet", NULL };
+static const char *networkcmd[]  = { "nm-connection-editor", NULL };
 // volume control:
 static const char *volupcmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "+5%", NULL };
 static const char *voldowncmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "-5%", NULL };
@@ -101,8 +101,8 @@ static Key keys[] = {
 	{ 0,          		XF86XK_AudioPause,	   spawn,          {.v = audioplaypausecmd } },
 	{ 0,          	XF86XK_TouchpadToggle,	   spawn,          {.v = touchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ Mod1Mask,                     XK_Tab,    focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_j,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
