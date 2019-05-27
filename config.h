@@ -1,8 +1,14 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
@@ -19,16 +25,18 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "[]", "[]", "[]", "[]", "[5]", "[6]", "[7]", "[]", "[]" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class      			instance    title       tags mask     isfloating   monitor */
+	{ "Vivaldi-stable",  	NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "VSCodium",  			NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "TelegramDesktop",    NULL,       NULL,       1 << 7,       0,           -1 },
+	{ "Spotify",  			NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -38,9 +46,9 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 
 /* key definitions */
@@ -59,12 +67,39 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "rofi", "-modi", "drun", "-show", "drun", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *iconscmd[]  = { "/home/kowal/.config/i3/scripts/dmenu-icons", NULL };
+static const char *updatecmd[]  = { "/home/kowal/.config/i3/scripts/run-updates", NULL };
+static const char *networkcmd[]  = { "nm-applet", NULL };
+// volume control:
+static const char *volupcmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "+5%", NULL };
+static const char *voldowncmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "-5%", NULL };
+static const char *voltogglecmd[]  = { "pactl", "set-sink-mute",  "@DEFAULT_SINK@", "toggle", NULL };
+// brightnes control:
+static const char *brightupcmd[]  = { "xbacklight", "-inc",  "20", NULL };
+static const char *brightdowncmd[]  = { "xbacklight", "-dec",  "20", NULL };
+// audio control:
+static const char *audionextcmd[]  = { "playerctl", "next", NULL };
+static const char *audioprevcmd[]  = { "playerctl", "previous", NULL };
+static const char *audioplaypausecmd[]  = { "playerctl", "play-pause", NULL };
+// touchpad control:
+static const char *touchpadcmd[]  = { "/home/kowal/.config/i3/scripts/touchpad-toggle", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,             			XK_i,	   spawn,          {.v = iconscmd } },
+	{ MODKEY,             			XK_u,	   spawn,          {.v = updatecmd } },
+	{ MODKEY,             			XK_n,	   spawn,          {.v = networkcmd } },
+	{ 0,           XF86XK_AudioRaiseVolume,	   spawn,          {.v = volupcmd } },
+	{ 0,           XF86XK_AudioLowerVolume,	   spawn,          {.v = voldowncmd } },
+	{ 0,           		XF86XK_AudioMute,	   spawn,          {.v = voltogglecmd } },
+	{ 0,           	XF86XK_MonBrightnessUp,	   spawn,          {.v = brightupcmd } },
+	{ 0,          XF86XK_MonBrightnessDown,	   spawn,          {.v = brightdowncmd } },
+	{ 0,          		XF86XK_AudioNext,	   spawn,          {.v = audionextcmd } },
+	{ 0,          		XF86XK_AudioPrev,	   spawn,          {.v = audioprevcmd } },
+	{ 0,          		XF86XK_AudioPlay,	   spawn,          {.v = audioplaypausecmd } },
+	{ 0,          		XF86XK_AudioPause,	   spawn,          {.v = audioplaypausecmd } },
+	{ 0,          	XF86XK_TouchpadToggle,	   spawn,          {.v = touchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -72,7 +107,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_k,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,                       XK_Return, zoom,           {0} },
+	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY|ShiftMask,             XK_Tab,    view,           {0} },
 	{ MODKEY,             			XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
