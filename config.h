@@ -35,6 +35,8 @@ static const Rule rules[] = {
 	/* class      			instance    title       tags mask     isfloating   monitor */
 	{ "Vivaldi-stable",  	NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "VSCodium",  			NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Google-chrome", 		"crx_haiffjcadagjlijoggckpgfnoeiflnem", 
+										NULL, 		1 << 3, 	  0, 		   -1 },
 	{ "TelegramDesktop",    NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Spotify",  			NULL,       NULL,       1 << 5,       0,           -1 },
 };
