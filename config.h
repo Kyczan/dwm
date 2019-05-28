@@ -25,7 +25,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "[]", "[]", "[]", "[]", "[5]", "[6]", "[7]", "[]", "[]" };
+static const char *tags[] = { "[]", "[]", "[]", "[]", "[]", "[]" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -35,8 +35,8 @@ static const Rule rules[] = {
 	/* class      			instance    title       tags mask     isfloating   monitor */
 	{ "Vivaldi-stable",  	NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "VSCodium",  			NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "TelegramDesktop",    NULL,       NULL,       1 << 7,       0,           -1 },
-	{ "Spotify",  			NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "TelegramDesktop",    NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Spotify",  			NULL,       NULL,       1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
