@@ -15,7 +15,7 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#282A36";
 static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#E6E6E6";
+static const char col_gray3[]       = "#CAA9FA";
 static const char col_gray4[]       = "#282A36";
 static const char col_cyan[]        = "#CAA9FA";
 static const char *colors[][3]      = {
@@ -68,8 +68,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "rofi", "-modi", "drun", "-show", "drun", NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *iconscmd[]  = { "/home/kowal/.config/i3/scripts/dmenu-icons", NULL };
-static const char *updatecmd[]  = { "/home/kowal/.config/i3/scripts/run-updates", NULL };
+static const char *iconscmd[]  = { "dmenu-icons", NULL };
+static const char *powercmd[]  = { "dmenu-power", NULL };
+static const char *updatecmd[]  = { "run-updates", NULL };
 static const char *networkcmd[]  = { "nm-connection-editor", NULL };
 // volume control:
 static const char *volupcmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "+5%", NULL };
@@ -83,13 +84,14 @@ static const char *audionextcmd[]  = { "playerctl", "next", NULL };
 static const char *audioprevcmd[]  = { "playerctl", "previous", NULL };
 static const char *audioplaypausecmd[]  = { "playerctl", "play-pause", NULL };
 // touchpad control:
-static const char *touchpadcmd[]  = { "/home/kowal/.config/i3/scripts/touchpad-toggle", NULL };
+static const char *touchpadcmd[]  = { "touchpad-toggle", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,             			XK_i,	   spawn,          {.v = iconscmd } },
+	{ MODKEY,             			XK_p,	   spawn,          {.v = powercmd } },
 	{ MODKEY,             			XK_u,	   spawn,          {.v = updatecmd } },
 	{ MODKEY,             			XK_n,	   spawn,          {.v = networkcmd } },
 	{ 0,           XF86XK_AudioRaiseVolume,	   spawn,          {.v = volupcmd } },
