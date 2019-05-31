@@ -1,48 +1,96 @@
-dwm - dynamic window manager
-============================
-dwm is an extremely fast, small, and dynamic window manager for X.
+# dwm - dynamic window manager
 
+This repo is a fork of [dwm](https://dwm.suckless.org) - an extremely fast, small, and dynamic window manager for X.
 
-Requirements
-------------
-In order to build dwm you need the Xlib header files.
+## Requirements
 
+In order to build dwm you need the `Xlib` header files.
 
-Installation
-------------
-Edit config.mk to match your local setup (dwm is installed into
-the /usr/local namespace by default).
+This fork is dependent on [KODO repo](https://github.com/Kyczan/kodo) (my dotfiles repo).
 
-Afterwards enter the following command to build and install dwm (if
-necessary as root):
+## Installation
 
-    make clean install
+```sh
+make && sudo make install
+```
 
+## Running dwm
 
-Running dwm
------------
 Add the following line to your .xinitrc to start dwm using startx:
 
-    exec dwm
+```sh
+exec dwm
+```
 
-In order to connect dwm to a specific display, make sure that
-the DISPLAY environment variable is set correctly, e.g.:
+In order to display status info in the bar, you can do something like this in your .xinitrc:
 
-    DISPLAY=foo.bar:1 exec dwm
+```sh
+while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
+do
+    sleep 1
+done &
+exec dwm
+```
 
-(This will start dwm on display :1 of the host foo.bar.)
+Quite nice status bar can be found in [KODO repo](https://github.com/Kyczan/kodo) (my dotfiles repo). Just look into `bin/bin/set-dwm-status-bar` file.
 
-In order to display status info in the bar, you can do something
-like this in your .xinitrc:
+## Configuration
 
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-    	sleep 1
-    done &
-    exec dwm
+The configuration of dwm is done by creating a custom config.h and (re)compiling the source code.
 
+My keybindings (need to setup [KODO](https://github.com/Kyczan/kodo) to make them work):
 
-Configuration
--------------
-The configuration of dwm is done by creating a custom config.h
-and (re)compiling the source code.
+- `MODKEY` - `WIN`
+- `MODKEY + d` - spawn `rofi` in `dmenu` mode with all instaled programs
+- `MODKEY + Enter` - spawn `st` terminal (see my [fork](https://github.com/Kyczan/st) of `st`)
+- `MODKEY + i` - show list of glyphicons
+- `MODKEY + p` - show power menu (lock, restart dwm statusbar, suspend, reboot, power off)
+- `MODKEY + u` - run system and programs updates
+- `MODKEY + n` - run network manager
+- `MODKEY + w` - show current weather in `dunst` notification
+- `ALT + TAB` - switch active progrms iside tag
+- bunch of multimedia keys (vol up/down, etc.)
+
+## Patches
+
+Following [patches](https://dwm.suckless.org/patches/) are already applied:
+
+- [notitle](https://dwm.suckless.org/patches/notitle/) - remove title
+- [pertag](https://dwm.suckless.org/patches/pertag/) - keep layout per tag
+- [systray](https://dwm.suckless.org/patches/systray/) - enable systray
+
+To apply another patch use following command:
+
+```sh
+git apply -3 --ignore-whitespace /path/to/patch.diff
+```
+
+But be careful. When patch modifies `config.def.h` copy these changes to `config.h` and reset state of first file:
+
+```sh
+git reset HEAD config.def.h
+git checkout -- config.def.h
+```
+
+Then repeat [installation](#installation) process.
+
+## Sync with original dwm
+
+Add `upstream` to original repo:
+
+```sh
+git remote add upstream git://git.suckless.org/dwm
+```
+
+Every time you want to sync type:
+
+```sh
+git fetch upstream
+git checkout master
+git merge upstream/master
+```
+
+This brings your `master` branch into sync with the upstream repository, without losing your local changes.
+For reference check this [github article](https://help.github.com/articles/syncing-a-fork/)
+
+Then repeat [installation](#installation) process.
