@@ -15,9 +15,9 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#282A36";
 static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#CAA9FA";
-static const char col_gray4[]       = "#282A36";
-static const char col_cyan[]        = "#CAA9FA";
+static const char col_gray3[]       = "#696969";
+static const char col_gray4[]       = "#FF79C6";
+static const char col_cyan[]        = "#282A36";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -48,9 +48,10 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "",     tile },    /* first entry is default */
+	// { "",     tile },    /* first entry is default */
+	{ "",     tile },    /* first entry is default */
 	{ "",      NULL },    /* no layout function means floating behavior */
-	{ "",      monocle },
+	{ "",      monocle },
 };
 
 /* key definitions */
