@@ -55,8 +55,10 @@ My keybindings (need to setup [KODO](https://github.com/Kyczan/kodo) to make the
 
 Following [patches](https://dwm.suckless.org/patches/) are already applied:
 
+- modified [activetagindicatorbar](https://dwm.suckless.org/patches/activetagindicatorbar/) - bar above tag instead of square dot
 - [notitle](https://dwm.suckless.org/patches/notitle/) - remove title
 - [pertag](https://dwm.suckless.org/patches/pertag/) - keep layout per tag
+- [ru gaps](https://dwm.suckless.org/patches/ru_gaps/) - gaps between tiles
 - [systray](https://dwm.suckless.org/patches/systray/) - enable systray
 
 To apply another patch use following command:
