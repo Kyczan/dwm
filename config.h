@@ -16,8 +16,8 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#282A36";
 static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#696969";
-static const char col_gray4[]       = "#FF79C6";
+static const char col_gray3[]       = "#f8f8f2";
+static const char col_gray4[]       = "#6272a4";
 static const char col_cyan[]        = "#282A36";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -26,7 +26,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "[]", "[]", "[]", "[]", "[]", "[]" };
+static const char *tags[] = { "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -35,11 +35,11 @@ static const Rule rules[] = {
 	 */
 	/* class      			instance    title       tags mask     isfloating   monitor */
 	{ "Vivaldi-stable",  	NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "VSCodium",  			  NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "VSCodium",  			NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Google-chrome", 		"crx_haiffjcadagjlijoggckpgfnoeiflnem", 
-										                NULL, 		  1 << 3, 	    0,           -1 },
-	{ "TelegramDesktop",  NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Spotify",  			  NULL,       NULL,       1 << 5,       0,           -1 },
+										NULL, 		1 << 3, 	  0,           -1 },
+	{ "TelegramDesktop",  	NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Spotify",  			NULL,       NULL,       1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
@@ -91,22 +91,22 @@ static const char *touchpadcmd[]  = { "touchpad-toggle", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,             			    XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,             			    XK_i,	     spawn,          {.v = iconscmd } },
-	{ MODKEY,             			    XK_p,	     spawn,          {.v = powercmd } },
-	{ MODKEY,             			    XK_u,	     spawn,          {.v = updatecmd } },
-	{ MODKEY,             			    XK_n,	     spawn,          {.v = networkcmd } },
-	{ MODKEY,             			    XK_w,	     spawn,          {.v = weathercmd } },
-	{ 0,           XF86XK_AudioRaiseVolume,	   spawn,          {.v = volupcmd } },
-	{ 0,           XF86XK_AudioLowerVolume,	   spawn,          {.v = voldowncmd } },
-	{ 0,           		    XF86XK_AudioMute,	   spawn,          {.v = voltogglecmd } },
-	{ 0,           	XF86XK_MonBrightnessUp,	   spawn,          {.v = brightupcmd } },
-	{ 0,          XF86XK_MonBrightnessDown,	   spawn,          {.v = brightdowncmd } },
-	{ 0,          		    XF86XK_AudioNext,	   spawn,          {.v = audionextcmd } },
-	{ 0,          		    XF86XK_AudioPrev,	   spawn,          {.v = audioprevcmd } },
-	{ 0,          		    XF86XK_AudioPlay,	   spawn,          {.v = audioplaypausecmd } },
-	{ 0,          		   XF86XK_AudioPause,	   spawn,          {.v = audioplaypausecmd } },
-	{ 0,          	 XF86XK_TouchpadToggle,	   spawn,          {.v = touchpadcmd } },
+	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,             			XK_i,	   spawn,          {.v = iconscmd } },
+	{ MODKEY,             			XK_p,	   spawn,          {.v = powercmd } },
+	{ MODKEY,             			XK_u,	   spawn,          {.v = updatecmd } },
+	{ MODKEY,             			XK_n,	   spawn,          {.v = networkcmd } },
+	{ MODKEY,             			XK_w,	   spawn,          {.v = weathercmd } },
+	{ 0,         XF86XK_AudioRaiseVolume,	   spawn,          {.v = volupcmd } },
+	{ 0,         XF86XK_AudioLowerVolume,	   spawn,          {.v = voldowncmd } },
+	{ 0,           		XF86XK_AudioMute,	   spawn,          {.v = voltogglecmd } },
+	{ 0,          XF86XK_MonBrightnessUp,	   spawn,          {.v = brightupcmd } },
+	{ 0,        XF86XK_MonBrightnessDown,	   spawn,          {.v = brightdowncmd } },
+	{ 0,          		XF86XK_AudioNext,	   spawn,          {.v = audionextcmd } },
+	{ 0,          		XF86XK_AudioPrev,	   spawn,          {.v = audioprevcmd } },
+	{ 0,          		XF86XK_AudioPlay,	   spawn,          {.v = audioplaypausecmd } },
+	{ 0,          	   XF86XK_AudioPause,	   spawn,          {.v = audioplaypausecmd } },
+	{ 0,           XF86XK_TouchpadToggle,	   spawn,          {.v = touchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ Mod1Mask,                     XK_Tab,    focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
@@ -116,7 +116,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY|ShiftMask,             XK_Tab,    view,           {0} },
-	{ MODKEY,             			    XK_q,      killclient,     {0} },
+	{ MODKEY,             			XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
