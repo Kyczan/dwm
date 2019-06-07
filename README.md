@@ -59,6 +59,7 @@ Following [patches](https://dwm.suckless.org/patches/) are already applied:
 - [notitle](https://dwm.suckless.org/patches/notitle/) - remove title
 - [pertag](https://dwm.suckless.org/patches/pertag/) - keep layout per tag
 - [ru gaps](https://dwm.suckless.org/patches/ru_gaps/) - gaps between tiles
+- [status2d](https://dwm.suckless.org/patches/status2d/) - enable colors in status bar
 - [systray](https://dwm.suckless.org/patches/systray/) - enable systray
 
 To apply another patch use following command:
