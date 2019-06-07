@@ -17,8 +17,8 @@ static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#282A36";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#f8f8f2";
-static const char col_gray4[]       = "#6272a4";
-static const char col_cyan[]        = "#282A36";
+static const char col_gray4[]       = "#f8f8f2";
+static const char col_cyan[]        = "#44475a";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
