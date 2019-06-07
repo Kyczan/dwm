@@ -75,6 +75,7 @@ static const char *updatecmd[]  = { "run-updates", NULL };
 static const char *networkcmd[]  = { "nm-connection-editor", NULL };
 static const char *weathercmd[]  = { "dunst-weather", NULL };
 static const char *citrixcmd[]  = { "google-chrome-stable", "--app-id=haiffjcadagjlijoggckpgfnoeiflnem", NULL };
+static const char *teilercmd[]  = { "teiler", NULL };
 // volume control:
 static const char *volupcmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "+5%", NULL };
 static const char *voldowncmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "-5%", NULL };
@@ -99,6 +100,7 @@ static Key keys[] = {
 	{ MODKEY,             			XK_n,	   spawn,          {.v = networkcmd } },
 	{ MODKEY,             			XK_w,	   spawn,          {.v = weathercmd } },
 	{ MODKEY,             			XK_c,	   spawn,          {.v = citrixcmd } },
+	{ 0,         			 		XK_Print,  spawn,          {.v = teilercmd } },
 	{ 0,         XF86XK_AudioRaiseVolume,	   spawn,          {.v = volupcmd } },
 	{ 0,         XF86XK_AudioLowerVolume,	   spawn,          {.v = voldowncmd } },
 	{ 0,           		XF86XK_AudioMute,	   spawn,          {.v = voltogglecmd } },
