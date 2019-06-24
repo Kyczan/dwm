@@ -40,6 +40,7 @@ static const Rule rules[] = {
 																		NULL, 			1 << 3, 	  	0,           -1 },
 	{ "TelegramDesktop",  NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Spotify",  				NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "st-256color",  		"sthacli",  NULL,       0,       			1,           -1 },
 };
 
 /* layout(s) */
@@ -75,6 +76,7 @@ static const char *updatecmd[]  = { "run-updates", NULL };
 static const char *networkcmd[]  = { "nm-connection-editor", NULL };
 static const char *weathercmd[]  = { "dunst-weather", NULL };
 static const char *citrixcmd[]  = { "google-chrome-stable", "--app-id=haiffjcadagjlijoggckpgfnoeiflnem", NULL };
+static const char *sthaclicmd[]  = { "run-sthacli", NULL };
 static const char *teilercmd[]  = { "teiler", NULL };
 // volume control:
 static const char *volupcmd[]  = { "pactl", "set-sink-volume",  "@DEFAULT_SINK@", "+5%", NULL };
@@ -99,6 +101,7 @@ static Key keys[] = {
 	{ MODKEY,             					XK_u,	   	 spawn,          {.v = updatecmd } },
 	{ MODKEY,             					XK_n,	   	 spawn,          {.v = networkcmd } },
 	{ MODKEY,             					XK_w,	   	 spawn,          {.v = weathercmd } },
+	{ MODKEY,             					XK_s,	   	 spawn,          {.v = sthaclicmd } },
 	{ MODKEY,             					XK_c,	   	 spawn,          {.v = citrixcmd } },
 	{ 0,         			 							XK_Print,  spawn,          {.v = teilercmd } },
 	{ 0,         XF86XK_AudioRaiseVolume,	   	 spawn,          {.v = volupcmd } },
