@@ -75,6 +75,7 @@ static const char *powercmd[]  = { "dmenu-power", NULL };
 static const char *updatecmd[]  = { "run-updates", NULL };
 static const char *networkcmd[]  = { "nm-connection-editor", NULL };
 static const char *weathercmd[]  = { "dunst-weather", NULL };
+static const char *vivaldicmd[]  = { "vivaldi-stable", NULL };
 static const char *citrixcmd[]  = { "google-chrome-stable", "--app-id=haiffjcadagjlijoggckpgfnoeiflnem", NULL };
 // static const char *sthaclicmd[]  = { "run-sthacli", NULL };
 static const char *haclidmenucmd[]  = { "ha-cli-dmenu", NULL };
@@ -103,6 +104,7 @@ static Key keys[] = {
 	{ MODKEY,             					XK_n,	   	 spawn,          {.v = networkcmd } },
 	{ MODKEY,             					XK_w,	   	 spawn,          {.v = weathercmd } },
 	{ MODKEY,             					XK_s,	   	 spawn,          {.v = haclidmenucmd } },
+	{ MODKEY,             					XK_v,	   	 spawn,          {.v = vivaldicmd } },
 	{ MODKEY,             					XK_c,	   	 spawn,          {.v = citrixcmd } },
 	{ 0,         			 							XK_Print,  spawn,          {.v = teilercmd } },
 	{ 0,         XF86XK_AudioRaiseVolume,	   	 spawn,          {.v = volupcmd } },
